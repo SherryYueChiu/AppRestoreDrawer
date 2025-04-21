@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <title>LSPosed模組清單</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.light {
+      background-color: #f5f5f5;
+      color: #000;
+    }
+
+    body.dark {
+      background-color: #1e1e1e;
+      color: #eee;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: inherit;
+      padding-bottom: 0.5rem;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    #search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    #search-input {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #clear-button,
+    #theme-toggle {
+      font-size: 1rem;
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+      transition: transform 0.2s;
+    }
+
+    #clear-button:hover,
+    #theme-toggle:hover {
+      transform: scale(1.2);
+    }
+
+    body.dark #search-input {
+      background-color: #333;
+      color: #eee;
+      border-color: #555;
+    }
+
+    #app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .app {
+      background: white;
+      border-radius: 8px;
+      padding: 0.5rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .app:hover {
+      transform: scale(1.05);
+    }
+
+    .app img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .app-name {
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      word-break: break-word;
+      font-weight: bold;
+    }
+
+    .package-name {
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+      word-break: break-word;
+      color: #333;
+    }
+
+    .fallback-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ccc;
+      color: white;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto;
+    }
+
+    /* 深色主題調整 */
+    body.dark .app {
+      background: #2c2c2c;
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark .package-name {
+      color: #ccc;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #323232;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 999;
+      font-size: 0.9rem;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>LSPosed模組清單</h1>
+    <div id="search-container">
+      <input type="text"
+        id="search-input"
+        placeholder="🔍 搜尋 App 名或包名...">
+      <button id="clear-button"
+        title="清除搜尋">×</button>
+      <button id="theme-toggle"
+        title="切換主題">🌓</button>
+    </div>
+  </header>
+
+  <div id="app-grid"></div>
+  <div id="toast"
+    class="toast"></div>
+
+  <script>
+    // 主題切換
+    const themeToggle = document.getElementById("theme-toggle");
+    const currentTheme = localStorage.getItem("theme") || "light";
+    document.body.classList.add(currentTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark");
+      document.body.classList.toggle("dark", !isDark);
+      document.body.classList.toggle("light", isDark);
+      localStorage.setItem("theme", isDark ? "light" : "dark");
+    });
+
+    // 建立 fallback icon
+    function createFallbackIcon(label, color) {
+      const avatar = document.createElement("div");
+      avatar.className = "fallback-avatar";
+      avatar.textContent = label?.charAt(0) || "?";
+      avatar.style.backgroundColor = color || "#ccc";
+      return avatar;
+    }
+
+    function pickColor(seed) {
+      const colors = [
+        "#FF6B6B", "#F4A261", "#FFD166", "#06D6A0",
+        "#118AB2", "#8E44AD", "#2ECC71", "#E67E22"
+      ];
+      const index = seed.charCodeAt(0) % colors.length;
+      return colors[index];
+    }
+
+    const container = document.getElementById("app-grid");
+    let allApps = [];
+
+    function renderApps(apps) {
+      container.innerHTML = "";
+
+      apps.forEach(app => {
+        const div = document.createElement("div");
+        div.className = "app";
+        div.title = `${app.label}（${app.package}）`;
+
+        const iconContainer = document.createElement("div");
+        if (app.icon && app.icon.startsWith("data:image") && app.icon.length > 1300) {
+          const img = document.createElement("img");
+          img.src = app.icon;
+          img.alt = app.label;
+          iconContainer.appendChild(img);
+        } else {
+          const fallback = createFallbackIcon(app.label, pickColor(app.label));
+          iconContainer.appendChild(fallback);
+        }
+
+        const appName = document.createElement("div");
+        appName.className = "app-name";
+        appName.textContent = app.label;
+
+        const packageName = document.createElement("div");
+        packageName.className = "package-name";
+        packageName.textContent = app.package;
+
+        // 點擊功能：包名 / App 名
+        packageName.addEventListener("click", (e) => {
+          e.stopPropagation();
+          navigator.clipboard.writeText(app.package);
+          showToast(`已複製包名：${app.package}`);
+        });
+
+        div.addEventListener("click", () => {
+          navigator.clipboard.writeText(app.label);
+          showToast(`已複製 App 名稱：${app.label}`);
+        });
+
+        div.appendChild(iconContainer);
+        div.appendChild(appName);
+        div.appendChild(packageName);
+        container.appendChild(div);
+      });
+    }
+
+    // 搜尋功能
+    const searchInput = document.getElementById("search-input");
+    const clearButton = document.getElementById("clear-button");
+
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const filtered = allApps.filter(app =>
+        app.label.toLowerCase().includes(keyword) ||
+        app.package.toLowerCase().includes(keyword)
+      );
+      renderApps(filtered);
+    });
+
+    clearButton.addEventListener("click", () => {
+      searchInput.value = "";
+      renderApps(allApps);
+      searchInput.focus();
+    });
+
+    // 讀取 JSON
+    fetch("LSPosedModuleList.json")
+      .then(res => res.json())
+      .then(apps => {
+        allApps = apps;
+        renderApps(apps);
+      })
+      .catch(err => {
+        console.error("讀取 LSPosedModuleList.json 發生錯誤", err);
+      });
+
+    let toastTimeout = null;
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+      }
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+        toastTimeout = null;
+      }, 2000);
+    }
+
+  </script>
+
+</body>
+
+</html>

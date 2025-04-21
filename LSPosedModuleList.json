@@ -1,0 +1,32 @@
+[
+  {
+    "package": "com.coderstory.toolkit",
+    "label": "核心修補",
+    "icon": "data:image/png;base64,"
+  },
+  {
+    "package": "com.tsng.hidemyapplist",
+    "label": "隱藏應用列表",
+    "icon": "data:image/png;base64,"
+  },
+  {
+    "package": "com.yuanwofei.cardemulator.pro",
+    "label": "Card Emulator Pro",
+    "icon": "data:image/png;base64,"
+  },
+  {
+    "package": "io.github.chipppppppppp.lime",
+    "label": "LIME",
+    "icon": "data:image/png;base64,"
+  },
+  {
+    "package": "com.simo.tgramhooks",
+    "label": "TGramHooks",
+    "icon": "data:image/png;base64,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"
+  },
+  {
+    "package": "com.varuns2002.disable_flag_secure",
+    "label": "Disable-FLAG_SECURE",
+    "icon": "data:image/png;base64,"
+  }
+]
