@@ -9,7 +9,7 @@ from pathlib import Path
 aapt_path = r"C:\Users\sherr\AppData\Local\Android\Sdk\build-tools\33.0.2\aapt.exe"  # 修改成你的
 apk_dir = Path("user_apks")
 icon_dir = Path("icons")
-output_json = Path("apps.json")
+output_json = Path("appList.json")
 
 apk_dir.mkdir(exist_ok=True)
 icon_dir.mkdir(exist_ok=True)
