@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>主力機重灌清單</title>
+  <title>Windows應用</title>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -165,7 +165,7 @@
 <body>
 
   <header>
-    <h1>主力機重灌清單</h1>
+    <h1>Windows應用</h1>
     <div id="search-container">
       <input type="text"
         id="search-input"
@@ -224,7 +224,7 @@
         div.title = `${app.label}（${app.package}）`;
 
         const iconContainer = document.createElement("div");
-        if (app.icon && app.icon.startsWith("data:image") && app.icon.length > 1300) {
+        if (app.icon && app.icon.startsWith("data:image")) {
           const img = document.createElement("img");
           img.src = app.icon;
           img.alt = app.label;
@@ -281,14 +281,14 @@
     });
 
     // 讀取 JSON
-    fetch("appList.json")
+    fetch("windowsAppList.json")
       .then(res => res.json())
       .then(apps => {
         allApps = apps;
         renderApps(apps);
       })
       .catch(err => {
-        console.error("讀取 appList.json 發生錯誤", err);
+        console.error("讀取 windowsAppList.json 發生錯誤", err);
       });
 
     let toastTimeout = null;
