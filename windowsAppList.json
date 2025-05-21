@@ -1,7 +1,272 @@
 [
   {
     "package": "",
+    "label": "7-Zip",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Adobe Acrobet",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Adobe Photoshop",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Android Studio",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Audacity",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Captura",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "CMake",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "CrystalDiskInfo",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "CrystalDiskMark",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Cursor",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Discord",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "DockerDesktop",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Excel",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "ExpressVPN",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "FileConverter",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Firefox",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Git",
+    "icon": ""
+  },
+  {
+    "package": "",
     "label": "GitKraken",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "GoogleChrome",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Immich",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "ITunes",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Java",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Line",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "LocalSend",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Messenger",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Microsoft Edge",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Node.js",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Nodepad++",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "OBS Studio",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "PDFGear",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Pngyu",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Powerpoint",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "PowerToys",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Python",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "SourceTree",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Steam",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Tailscale",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Telegram",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Teamviewer",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Ubuntu",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "VLC",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Visual Studio",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "WindHawk",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Windows Android Subsystem",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Word",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "WSL",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "YY開播",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "ZeroTier",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "超注音",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "WindHawk",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Scrcpy",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "TrafficMonitor",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Ngrok",
+    "icon": ""
+  },
+  {
+    "package": "",
+    "label": "Voicemeeter",
     "icon": ""
   }
 ]
