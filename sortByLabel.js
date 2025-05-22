@@ -14,11 +14,36 @@ function sortByLabel(arr) {
     });
 }
 
-// 使用範例
-const data = [
-    { label: 'app1', value: 1 },
-    { label: 'app2', value: 2 },
-    { label: 'app3', value: 3 }
-];
+// 檢查是否提供了檔案路徑參數
+if (process.argv.length < 3) {
+    console.error('請提供 JSON 檔案路徑');
+    console.error('使用方式: node sortByLabel.js <json檔案路徑>');
+    process.exit(1);
+}
 
-console.log('排序後：', sortByLabel(data));
+const fs = require('fs');
+const path = require('path');
+
+// 讀取並處理 JSON 檔案
+try {
+    const filePath = process.argv[2];
+    const jsonData = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(jsonData);
+
+    // 檢查輸入是否為陣列
+    if (!Array.isArray(data)) {
+        console.error('錯誤：JSON 檔案必須包含一個陣列');
+        process.exit(1);
+    }
+
+    // 排序資料
+    const sortedData = sortByLabel(data);
+
+    // 將排序後的結果寫入原始檔案
+    fs.writeFileSync(filePath, JSON.stringify(sortedData, null, 2));
+    console.log(`排序完成，結果已更新至：${filePath}`);
+
+} catch (error) {
+    console.error('錯誤：', error.message);
+    process.exit(1);
+}
