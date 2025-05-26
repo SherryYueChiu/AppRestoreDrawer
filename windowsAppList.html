@@ -224,7 +224,7 @@
         div.title = `${app.label}（${app.package}）`;
 
         const iconContainer = document.createElement("div");
-        if (app.icon && app.icon.startsWith("data:image")) {
+        if (app.icon && app.icon.startsWith("data:image") && app.icon.length > 100) {
           const img = document.createElement("img");
           img.src = app.icon;
           img.alt = app.label;
